@@ -661,13 +661,12 @@ export class PiAcpSession {
           break
         }
 
-        if (ame?.type === 'thinking_delta' && typeof ame.delta === 'string') {
-          if (!this.hideThinking) {
-            this.emit({
-              sessionUpdate: 'agent_thought_chunk',
-              content: { type: 'text', text: ame.delta } satisfies ContentBlock
-            })
-          }
+        if (ame?.type === 'thinking_delta' && typeof ame.delta === 'string' && !this.hideThinking) {
+          this.emit({
+            sessionUpdate: 'agent_thought_chunk',
+            content: { type: 'text', text: ame.delta } satisfies ContentBlock
+          })
+
           break
         }
 
